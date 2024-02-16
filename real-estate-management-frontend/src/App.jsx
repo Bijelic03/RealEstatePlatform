@@ -1,11 +1,13 @@
 import Navbar from './components/layout/Navbar';
+import { testFunction } from './utils/utils';
 
-function App() {
+const App = () => {
+  testFunction();
   return (
     <>
       <Navbar></Navbar>
     </>
   );
-}
+};
 
 export default App;
