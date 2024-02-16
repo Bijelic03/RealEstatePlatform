@@ -1,16 +1,20 @@
 package com.ftn.realestatemanagement.controller;
 
+import com.ftn.realestatemanagement.dto.AgencyDto;
 import com.ftn.realestatemanagement.dto.EstateDto;
-import com.ftn.realestatemanagement.model.Location;
+import com.ftn.realestatemanagement.dto.LocationDto;
+import com.ftn.realestatemanagement.service.AgencyService;
+import com.ftn.realestatemanagement.service.EstateService;
+import com.ftn.realestatemanagement.service.LocationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
-import com.ftn.realestatemanagement.service.EstateService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -35,4 +39,28 @@ public class EstateController {
         return ResponseEntity.ok(estateService.searchEstates(name, city, fromArea, toArea,
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
     }
-}
+
+    private final LocationService locationService;
+
+    private final AgencyService agencyService;
+
+    @GetMapping("/add")
+    public String showEstateForm(Model model){
+        model.addAttribute("estate", new EstateDto());
+
+        List<LocationDto> locationList = locationService.getAllLocations();
+        model.addAttribute("locations", locationList);
+
+        List<AgencyDto> agencyList = agencyService.getAllAgencies();
+        model.addAttribute("agencies", agencyList);
+        return "fragments/addEstate";
+    }
+
+    @PostMapping("/add")
+    public String createEstate(EstateDto estateDto){
+
+        estateService.createEstate(estateDto);
+        return "redirect:/";
+    }
+
+    }

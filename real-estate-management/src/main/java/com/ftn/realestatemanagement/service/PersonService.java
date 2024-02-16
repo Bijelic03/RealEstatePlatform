@@ -12,6 +12,8 @@ public interface PersonService {
 
     Optional<PersonDto> register(PersonDto personDto);
 
+    Person getById(Long id);
+
     List<PersonDto> getAllUsers();
 
 }
