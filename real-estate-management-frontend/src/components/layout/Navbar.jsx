@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Register from '../Register';
+import Login from '../Login';
 
 const agentsLinks = [
   {
@@ -56,14 +57,20 @@ function classNames(...classes) {
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOpenRegister, setIsOpenRegister] = useState(false);
+  const [isOpenLogin, setIsOpenLogin] = useState(false);
 
   function handleOpenRegister() {
     setIsOpenRegister((isOpenRegister) => !isOpenRegister);
   }
 
+  function handleOpenLogin() {
+    setIsOpenLogin((isOpenLogin) => !isOpenLogin);
+  }
+
   return (
     <>
       <Register isOpenRegister={isOpenRegister} handleOpenRegister={handleOpenRegister} />
+      <Login isOpenLogin={isOpenLogin} handleOpenLogin={handleOpenLogin} />
       <header className='bg-white'>
         <nav
           className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8'
@@ -158,7 +165,11 @@ const Navbar = () => {
             </a>
           </Popover.Group>
           <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-            <a href='#' className='text-sm font-semibold leading-6 text-gray-900'>
+            <a
+              href='#'
+              onClick={() => setIsOpenLogin(true)}
+              className='text-sm font-semibold leading-6 text-gray-900'
+            >
               Log in <span aria-hidden='true'>&rarr;</span>
             </a>
           </div>
@@ -214,7 +225,10 @@ const Navbar = () => {
                   </Disclosure>
 
                   {navbarLinks.map((link) => (
-                    <a className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'>
+                    <a
+                      href='#'
+                      className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                    >
                       {link.name}
                     </a>
                   ))}
@@ -229,6 +243,7 @@ const Navbar = () => {
                 <div className='py-6'>
                   <a
                     href='#'
+                    onClick={() => setIsOpenLogin(true)}
                     className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                   >
                     Log in
