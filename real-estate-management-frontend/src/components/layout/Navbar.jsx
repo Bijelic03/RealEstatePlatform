@@ -10,6 +10,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Register from '../Register';
 import Login from '../Login';
+import { Link } from 'react-router-dom';
 
 const agentsLinks = [
   {
@@ -29,26 +30,18 @@ const agentsLinks = [
 const navbarLinks = [
   {
     name: 'Estates',
-    href: '#'
+    to: '/estates'
   },
   {
     name: 'Profile',
-    href: '#'
+    to: '/profile'
   },
   {
-    name: 'Owner properties',
-    href: '#'
-  },
-  {
-    name: 'Agent properties',
-    href: '#'
-  },
-  {
-    name: 'Admin properties',
-    href: '#'
+    name: 'properties',
+    to: '/properties'
   }
 ];
-const callsToAction = [{ name: 'See all agents', href: '#', icon: UsersIcon }];
+const callsToAction = [{ name: 'See all agents', to: '#', icon: UsersIcon }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -77,14 +70,14 @@ const Navbar = () => {
           aria-label='Global'
         >
           <div className='flex lg:flex-1'>
-            <a href='#' className='-m-1.5 p-1.5'>
+            <Link to='/' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Your Company</span>
               <img
                 className='h-8 w-auto'
                 src='https://cdn.discordapp.com/attachments/831510841152897038/1207443638116810762/pngwing.com.png?ex=65dfaa84&is=65cd3584&hm=83a330be3b18bd64458dcc741823ea56262f45a86fbc0afff3de652533932928&'
                 alt=''
               />
-            </a>
+            </Link>
           </div>
           <div className='flex lg:hidden'>
             <button
@@ -126,10 +119,10 @@ const Navbar = () => {
                           />
                         </div>
                         <div className='flex-auto'>
-                          <a href={item.href} className='block font-semibold text-gray-900'>
+                          <Link to={item.to} className='block font-semibold text-gray-900'>
                             {item.name}
                             <span className='absolute inset-0' />
-                          </a>
+                          </Link>
                           <p className='mt-1 text-gray-600'>{item.description}</p>
                         </div>
                       </div>
@@ -152,40 +145,38 @@ const Navbar = () => {
             </Popover>
 
             {navbarLinks.map((link) => (
-              <a href={link.href} className='text-sm font-semibold leading-6 text-gray-900'>
+              <Link to={link.to} className='text-sm font-semibold leading-6 text-gray-900'>
                 {link.name}
-              </a>
+              </Link>
             ))}
-            <a
-              href='#'
+            <Link
               onClick={() => setIsOpenRegister(true)}
               className='text-sm font-semibold leading-6 text-gray-900'
             >
               Register
-            </a>
+            </Link>
           </Popover.Group>
           <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-            <a
-              href='#'
+            <Link
               onClick={() => setIsOpenLogin(true)}
               className='text-sm font-semibold leading-6 text-gray-900'
             >
               Log in <span aria-hidden='true'>&rarr;</span>
-            </a>
+            </Link>
           </div>
         </nav>
         <Dialog as='div' className='lg:hidden' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className='fixed inset-0 z-10' />
           <Dialog.Panel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
             <div className='flex items-center justify-between'>
-              <a href='#' className='-m-1.5 p-1.5'>
+              <Link to='/' className='-m-1.5 p-1.5'>
                 <span className='sr-only'>Your Company</span>
                 <img
                   className='h-8 w-auto'
                   src='https://cdn.discordapp.com/attachments/831510841152897038/1207443638116810762/pngwing.com.png?ex=65dfaa84&is=65cd3584&hm=83a330be3b18bd64458dcc741823ea56262f45a86fbc0afff3de652533932928&'
                   alt=''
                 />
-              </a>
+              </Link>
               <button
                 type='button'
                 className='-m-2.5 rounded-md p-2.5 text-gray-700'
@@ -225,29 +216,27 @@ const Navbar = () => {
                   </Disclosure>
 
                   {navbarLinks.map((link) => (
-                    <a
-                      href='#'
+                    <Link
+                      to={link.to}
                       className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   ))}
-                  <a
-                    href='#'
+                  <Link
                     onClick={() => setIsOpenRegister(true)}
                     className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                   >
                     Register
-                  </a>
+                  </Link>
                 </div>
                 <div className='py-6'>
-                  <a
-                    href='#'
+                  <Link
                     onClick={() => setIsOpenLogin(true)}
                     className='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                   >
                     Log in
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
