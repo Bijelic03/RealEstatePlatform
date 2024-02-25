@@ -1,3 +1,4 @@
+import UserPanel from './components/UserPanel';
 import Navbar from './components/layout/Navbar';
 import { testFunction } from './utils/utils';
 
@@ -6,6 +7,7 @@ const App = () => {
   return (
     <>
       <Navbar></Navbar>
+      <UserPanel />
     </>
   );
 };
