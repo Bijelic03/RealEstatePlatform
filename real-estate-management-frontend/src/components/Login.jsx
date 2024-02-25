@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import PrimaryButton from './core/PrimaryButton';
 import SecondaryButton from './core/SecondaryButton';
+import Input from './core/Input';
 
 const Login = ({ isOpenLogin, handleOpenLogin }) => {
   return (
@@ -38,10 +39,10 @@ const Login = ({ isOpenLogin, handleOpenLogin }) => {
                 <div className='mt-2 '>
                   <form>
                     <div className='flex flex-col p-5 '>
-                      <input className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input />
                       <label>Username</label>
 
-                      <input type='password' className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input type='password' />
                       <label>Password</label>
                     </div>
                   </form>
