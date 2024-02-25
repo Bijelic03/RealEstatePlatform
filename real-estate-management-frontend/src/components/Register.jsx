@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import PrimaryButton from './core/PrimaryButton';
 import SecondaryButton from './core/SecondaryButton';
+import Input from './core/Input';
 
 const Register = ({ isOpenRegister, handleOpenRegister }) => {
   return (
@@ -40,27 +41,27 @@ const Register = ({ isOpenRegister, handleOpenRegister }) => {
                     <div className='flex flex-col p-5 '>
                       <div className='flex flex-col md:flex-row  md:space-x-5'>
                         <div className='flex flex-col'>
-                          <input className='outline-none mt-3 border-b-2 py-1'></input>
+                          <Input />
                           <label>Name</label>
                         </div>
                         <div className='flex flex-col'>
-                          <input className='outline-none mt-3 border-b-2 py-1'></input>
+                          <Input />
                           <label>Surname</label>
                         </div>
                       </div>
-                      <input className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input />
 
                       <label>Email</label>
-                      <input className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input />
 
                       <label>Phone Number</label>
-                      <input className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input />
 
                       <label>Address</label>
-                      <input className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input type='password' />
 
                       <label>Password</label>
-                      <input type='password' className='outline-none mt-3 border-b-2 py-1'></input>
+                      <Input type='password' />
 
                       <label type='password'>Repeat Password</label>
                     </div>
