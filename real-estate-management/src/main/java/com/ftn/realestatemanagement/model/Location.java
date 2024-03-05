@@ -1,0 +1,23 @@
+package com.ftn.realestatemanagement.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Location {
+    @Id
+    private long id;
+    private long postalCode;
+    private String country;
+    private String city;
+    private String district;
+    private String street;
+    private String streetNumber;
+
+}

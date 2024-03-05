@@ -1,25 +1,18 @@
 package com.ftn.realestatemanagement.model;
 
-
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity(name = "Person")
+@Entity(name = "Image")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+public class Image {
     @Id
     private long id;
-
-    private String username;
-
-    private String password;
-
+    private String imagePath;
     private String name;
-
-    private String surname;
 }

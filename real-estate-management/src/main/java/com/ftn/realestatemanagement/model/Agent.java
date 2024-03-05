@@ -8,15 +8,15 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "User")
+@Entity(name = "Agent")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class User extends Person {
-    private String phone;
-    private String email;
+public class Agent extends Person {
     @OneToMany(orphanRemoval = true)
-    private Set<VisitRequest> visitRequests = new HashSet<>();
+    private Set<AgentReview> reviews = new HashSet<>();
     @ManyToOne
-    private Location address;
+    private Agency agency;
+    @OneToMany(orphanRemoval = true)
+    private Set<Estate> estates = new HashSet<>();
 }
