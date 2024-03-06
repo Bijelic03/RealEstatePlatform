@@ -6,7 +6,9 @@ const Wrapper = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className='mx-10 md:mx-52 '>
+        <Outlet />
+      </div>
     </>
   );
 };
