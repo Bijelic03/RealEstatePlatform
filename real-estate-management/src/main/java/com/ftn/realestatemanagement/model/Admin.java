@@ -1,15 +1,20 @@
 package com.ftn.realestatemanagement.model;
 
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
 
 @Entity(name = "Admin")
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Admin extends Person{
+public class Admin extends Person  implements Serializable {
+
+    protected Admin(){
+
+    }
+
+    public Admin(long id, String username, String password, String name, String surname) {
+        super(id, username, password, name, surname);
+    }
+
 
 }
