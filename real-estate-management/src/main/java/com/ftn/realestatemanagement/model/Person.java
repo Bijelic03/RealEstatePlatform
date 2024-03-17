@@ -32,6 +32,9 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
+    public Person(String username, String password, String name, String surname) {
+    }
+
     public long getId() {
         return id;
     }
