@@ -5,10 +5,11 @@ package com.ftn.realestatemanagement.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 import java.io.Serializable;
 
-@Entity(name = "Person")
+@MappedSuperclass
 public class Person implements Serializable {
     @Id
     private long id;
@@ -30,6 +31,9 @@ public class Person implements Serializable {
         this.password = password;
         this.name = name;
         this.surname = surname;
+    }
+
+    public Person(String username, String password, String name, String surname) {
     }
 
     public long getId() {
