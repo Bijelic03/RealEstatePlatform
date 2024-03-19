@@ -17,9 +17,4 @@ public class AdminService {
 
 
 
-    @Transactional
-    public void saveAdmin() {
-        Admin admin1 = new Admin("a", "a", "Dragan", "Bijelic");
-        adminRepository.save(admin1);
-    }
 }
