@@ -5,13 +5,21 @@ package com.ftn.realestatemanagement.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
 import lombok.*;
 
 @Entity(name = "Person")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+
+import jakarta.persistence.MappedSuperclass;
+
+import java.io.Serializable;
+
+@MappedSuperclass
+public class Person implements Serializable {
+
     @Id
     private long id;
 
@@ -22,4 +30,7 @@ public class Person {
     private String name;
 
     private String surname;
+
+
+
 }
