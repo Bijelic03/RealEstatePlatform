@@ -1,9 +1,6 @@
 package com.ftn.realestatemanagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -13,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AgentReview {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int rating;
     private String description;

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,12 @@ public class PersonServiceImpl implements PersonService {
     return PersonDto.convertToDto(personRepository.getUserByUsernameAndPassword(personDto.getUsername(), personDto.getPassword()));
     }
 
+    @Override
+    public Optional<PersonDto> register(PersonDto personDto) {
+        return personRepository.getUserByUsername(personDto.getUsername())
+                .map(user -> Optional.<PersonDto>empty())
+                .orElseGet(() -> Optional.of(PersonDto.convertToDto(personRepository.save(personDto.convertToModel()))));
+    }
     @Override
     public List<PersonDto> getAllUsers() {
         return personRepository.findAll().stream()

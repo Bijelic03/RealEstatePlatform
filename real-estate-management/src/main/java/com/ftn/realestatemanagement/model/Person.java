@@ -4,6 +4,8 @@ package com.ftn.realestatemanagement.model;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import lombok.*;
@@ -19,6 +21,7 @@ import java.io.Serializable;
 public class Person {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private PersonType role;
@@ -31,7 +34,7 @@ public class Person {
 
     private String surname;
 
-    private Location address;
+    private String address;
 
     private String phone;
 

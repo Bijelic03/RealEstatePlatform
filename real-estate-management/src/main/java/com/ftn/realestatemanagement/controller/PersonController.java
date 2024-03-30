@@ -21,8 +21,4 @@ public class PersonController {
         return ResponseEntity.ok(personService.getAllUsers());
     }
 
-    @PostMapping
-    public ResponseEntity<PersonDto> login(@RequestBody PersonDto personDto){
-        return ResponseEntity.ok(personService.login(personDto));
-    }
 }

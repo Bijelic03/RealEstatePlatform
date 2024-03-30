@@ -1,9 +1,6 @@
 package com.ftn.realestatemanagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -13,6 +10,7 @@ import lombok.*;
 
 public class Visit {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private boolean estateReview;
     private boolean sold;

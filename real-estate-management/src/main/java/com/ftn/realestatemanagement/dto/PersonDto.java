@@ -25,7 +25,7 @@ public class PersonDto {
 
     private String surname;
 
-    private Location address;
+    private String address;
 
     private String email;
 

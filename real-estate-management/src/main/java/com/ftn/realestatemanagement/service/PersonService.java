@@ -10,6 +10,8 @@ public interface PersonService {
 
     PersonDto login(PersonDto personDto);
 
+    Optional<PersonDto> register(PersonDto personDto);
+
     List<PersonDto> getAllUsers();
 
 }
