@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+    <div th:replace="fragments/layout :: zajednickaStranica(~{::title}, ~{::centralniDiv})">
+
+         <div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
+			     <div class="bg-white p-8 shadow-md rounded-md w-96">
+                <h2 class="text-2xl font-bold mb-6" th:text="#{label.login}">Login</h2>
+        <form th:action="@{/login}" method="post">
+            <div class="mb-4">
+                        <label for="korisnickoIme" class="block text-sm font-medium text-gray-600" th:text="#{label.username}">Korisničko Ime:</label>
+                <input type="text" id="korisnickoIme" name="korisnickoIme" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="mb-4">
+                        <label for="sifra" class="block text-sm font-medium text-gray-600" th:text="#{label.password}">Šifra:</label>
+                <input type="password" id="sifra" name="sifra" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <div class="flex items-center justify-between">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md" th:text="#{button.login}">Login</button>
+            </div>
+        </form>
+    </div>
+<div th:if="${loginError}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline" th:text="${loginError}"></span>
+</div>
+
+
+    </div>
+    </div>
+</body>
+</html>
+
+

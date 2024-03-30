@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src=https://code.jquery.com/jquery-3.6.0.js></script>
+
+</head>
+
+<body>
+	<div th:fragment="putovanja" class="bg-white">
+
+		<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+				<h1 class="text-4xl font-bold tracking-tight text-gray-900" th:text="#{putovanja.title}">Putovanja</h1>
+
+				<div class="flex items-center">
+					<div class="relative inline-block text-left">
+						<div>
+							<button type="button" onclick="handleSort()"
+								class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+								id="menu-button" aria-expanded="false" aria-haspopup="true">
+								<span th:text="#{putovanja.sortLabel}">Sortiranje prema:</span>
+								<svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+									viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+									<path fill-rule="evenodd"
+										d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+										clip-rule="evenodd" />
+								</svg>
+							</button>
+						</div>
+
+
+						<div id="sortMenu"
+							class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+							role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+							<div class="py-1" role="none">
+								<a href="#" class="font-medium text-gray-900 block px-4 py-2 text-sm" role="menuitem"
+									tabindex="-1" id="menu-item-0"></a>
+								<a onclick="sortCards(this)"
+									th:attr="data-sort-property='cena', data-sort-direction='ASC'"
+									class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+									id="menu-item-1" th:text="#{putovanja.sortLowestPrice}">Najnižoj ceni</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='cena', data-sort-direction='DESC'" role="menuitem"
+									tabindex="-1" id="menu-item-2" th:text="#{putovanja.sortHighestPrice}">Najvišoj
+									ceni</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='destinacija', data-sort-direction='ASC'"
+									role="menuitem" tabindex="-1" id="menu-item-3"
+									th:text="#{putovanja.sortDestinationAsc}">Destinaciji rastuće</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='destinacija', data-sort-direction='DESC'"
+									role="menuitem" tabindex="-1" id="menu-item-3"
+									th:text="#{putovanja.sortDestinationDesc}">Destinaciji opadajuće</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='kategorija', data-sort-direction='ASC'" role="menuitem"
+									tabindex="-1" id="menu-item-4" th:text="#{putovanja.sortCategoryAsc}">Kategoriji
+									rastuće</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='kategorija', data-sort-direction='DESC'"
+									role="menuitem" tabindex="-1" id="menu-item-4"
+									th:text="#{putovanja.sortCategoryDesc}">Kategoriji opadajuće</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='prevoz', data-sort-direction='ASC'" role="menuitem"
+									tabindex="-1" id="menu-item-4" th:text="#{putovanja.sortTransportAsc}">Prevozno
+									sredstvo rastuće</a>
+								<a onclick="sortCards(this)" class="text-gray-500 block px-4 py-2 text-sm"
+									th:attr="data-sort-property='prevoz', data-sort-direction='DESC'" role="menuitem"
+									tabindex="-1" id="menu-item-4" th:text="#{putovanja.sortTransportDesc}">Prevozno
+									sredstvo opadajuće</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<section aria-labelledby="products-heading" class="pb-24 pt-6">
+
+				<div class="display-flex justify-center grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+					<!-- Filters -->
+					<form class="col-span-1 hidden lg:block">
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.destinationName}">Naziv
+										destinacije</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="relative mt-2 rounded-md shadow-sm">
+								<input type="text" id="nazivDestinacije"
+									class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="">
+							</div>
+						</div>
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.transportType}">Tip
+										prevoznog sredstva</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="pt-6" id="filter-section-0">
+								<div id="prevoz" class="space-y-4">
+									<div th:each="tip : ${T(com.ftn.TravelOrganisation.model.PrevoznoSredstvoTipEnum).values()}"
+										id="tip" th:value="${tip}" class="flex items-center">
+										<input th:id="${tip}" type="checkbox"
+											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+										<label for="filter-color-0" class="ml-3 text-sm text-gray-600"
+											th:text="${tip.displayName}"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900"
+										th:text="#{putovanja.travelCategory}">Kategorija putovanja</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="pt-6" id="filter-section-0">
+								<div id="kategorija" class="space-y-4">
+									<div th:each="tip : ${T(com.ftn.TravelOrganisation.model.KategorijaPutovanjaEnum).values()}"
+										id="tip" th:value="${tip}" class="flex items-center">
+										<input th:id="${tip}" type="checkbox"
+											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+										<label class="ml-3 text-sm text-gray-600" th:text="${tip.displayName}"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-1" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.accommodationType}">Tip
+										smeštajne jedinice</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="pt-6" id="filter-section-1">
+								<div id="smestaj" class="space-y-4">
+									<div th:each="tip : ${T(com.ftn.TravelOrganisation.model.SmestajnaJedinicaTipEnum).values()}"
+										id="tip" th:value="${tip}" class="flex items-center">
+										<input th:id="${tip}" type="checkbox"
+											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+										<label class="ml-3 text-sm text-gray-600" th:text="${tip.displayName}"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-2" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.travelTime}">Vreme
+										putovanja</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="pt-6" id="filter-section-2">
+								<div class="mb-4 pr-5">
+									<label class="block text-sm font-medium text-gray-600"
+										th:text="#{putovanja.departureDate}">Datum polaska</label>
+									<input id="datumPolaska" type="date" class="mt-1 p-2 w-full border rounded-md" />
+								</div>
+
+								<div class="mb-4 pr-5">
+									<label class="block text-sm font-medium text-gray-600"
+										th:text="#{putovanja.returnDate}">Datum povratka</label>
+									<input id="datumPovratka" type="date" class="mt-1 p-2 w-full border rounded-md" />
+								</div>
+							</div>
+						</div>
+
+						<h3 class="-my-3 flow-root">
+							<!-- Expand/collapse section button -->
+							<span class="font-medium text-gray-900" th:text="#{putovanja.price}">Cena</span>
+						</h3>
+						<div class="flex">
+							<div class="flex items-center border-b border-gray-200 py-6 mr-4">
+								<p th:text="#{putovanja.from}">od:</p>
+								<input type="text" id="cenaOd"
+									class="ml-3 block w-1/2 rounded-md border-0 py-1.5 pl-1 pr-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="rsd">
+							</div>
+
+							<div class="flex items-center border-b border-gray-200 py-6 mr-4">
+								<p th:text="#{putovanja.to}">do:</p>
+								<input type="text" id="cenaDo"
+									class="ml-3 block w-1/2 rounded-md border-0 py-1.5 pl-1 pr-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="rsd">
+							</div>
+						</div>
+
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.numberOfNights}">Broj
+										nocenja</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="relative mt-2 rounded-md shadow-sm">
+								<input value="0" type="number" id="brojNocenja" max="10" min="0"
+									class="block w-1/3 rounded-md border-0 py-1.5 pl-2  pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="">
+							</div>
+						</div>
+
+						<div class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900">Broj osoba</span>
+
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="relative mt-2 rounded-md shadow-sm">
+
+								<input value="0" type="number" id="brojOsoba" max="10" min="0"
+									class="block w-1/3 rounded-md border-0 py-1.5 pl-2  pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="">
+
+							</div>
+
+						</div>
+						<div th:if="${session.prijavljeni_korisnik != null && (session.prijavljeni_korisnik.isAdmin || session.prijavljeni_korisnik.isMenadzer)}"
+							class="border-b border-gray-200 py-6">
+							<h3 class="-my-3 flow-root">
+								<!-- Expand/collapse section button -->
+								<button type="button"
+									class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+									aria-controls="filter-section-0" aria-expanded="false">
+									<span class="font-medium text-gray-900" th:text="#{putovanja.travelCode}">Šifra
+										putovanja</span>
+								</button>
+							</h3>
+							<!-- Filter section, show/hide based on section state. -->
+							<div class="relative mt-2 rounded-md shadow-sm">
+								<input type="text" id="sifraPutovanja"
+									class="block w-full rounded-md border-0 py-1.5 pl-2  pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									placeholder="">
+							</div>
+						</div>
+						<div class="flex flex-col">
+							<div class="mb-4 pr-5 pt-5">
+								<button onclick="pretraziHandleClick()" id="pretraziBttn" type="button"
+									class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+									th:text="#{putovanja.search}">Pretraži</button>
+							</div>
+						</div>
+
+
+
+
+
+					</form>
+
+					<!-- Product grid -->
+					<div class="px-20 col-span-4 flex items-center justify-center min-h-screen">
+						<div id="listaPutovanja" class="col-span-1 mt-6 grid grid-cols-2 gap-8">
+							<!-- Iterate over each putovanje in listaPutovanja -->
+							<div class="mb-8" th:fragment="listaPutovanja" th:each="putovanje : ${listaPutovanja}"
+								th:insert="fragments/card :: putovanjeCard">
+							</div>
+						</div>
+					</div>
+
+
+
+
+				</div>
+				<script src=https://code.jquery.com/jquery-3.6.0.js></script>
+
+				<script th:inline="javascript">
+					var selectedSmestaji = []
+					var cenaOd = null;
+					var cenaDo = null;
+					var selectedkategorije = [];
+					var selectedPrevozi = [];
+					var nazivDestinacije = null;
+					var datumPolaska = null
+					var datumPovratka = null
+
+					var brNocenja = null
+					var brOsoba = null
+					var sifraPutovanja = null
+
+					$(document).ready(function () {
+						var pretraziBttn = $('#pretraziBttn')
+
+						function dateChanged() {
+							datumPolaska = $('#datumPolaska').val();
+							datumPovratka = $('#datumPovratka').val();
+
+							if (datumPolaska && datumPovratka) {
+								if (new Date(datumPolaska) <= new Date(datumPovratka)) {
+									pretraziBttn.prop('disabled', false);
+								} else {
+									pretraziBttn.prop('disabled', true);
+								}
+							} else {
+
+								pretraziBttn.prop('disabled', false);
+							}
+
+						}
+
+						function priceChanged() {
+							cenaOd = $("#cenaOd").val()
+							cenaDo = $("#cenaDo").val()
+
+							if (cenaOd && cenaDo) {
+								if (cenaOd > cenaDo) {
+									pretraziBttn.prop('disabled', true)
+								}
+							}
+						}
+
+
+						$('#datumPolaska, #datumPovratka').change(function () {
+							dateChanged();
+						});
+
+						$('#cenaOd, #cenaDo').change(function () {
+							priceChanged();
+						});
+
+
+
+
+					})
+					function pretraziHandleClick() {
+
+						updateSelectedSmestaj()
+						updateSelectedPrevoz()
+						updateSelectedKategorija()
+						nazivDestinacije = $("#nazivDestinacije").val()
+						if (nazivDestinacije.trim() == 0) {
+							nazivDestinacije = null
+						}
+						brNocenja = $("#brojNocenja").val()
+						brOsoba = $("#brojOsoba").val()
+						sifraPutovanja = $("#sifraPutovanja").val()
+						datumPolaska = $('#datumPolaska').val();
+						datumPovratka = $('#datumPovratka').val();
+						if (sifraPutovanja == undefined) {
+							sifraPutovanja = null
+						}
+						else if (sifraPutovanja.trim() == 0) {
+							sifraPutovanja = null
+						}
+
+						if (brNocenja == null) {
+							brNocenja = 0;
+						}
+
+						if (brOsoba == null) {
+							brOsoba = 0;
+						}
+
+
+						data = {
+							datumPolaska: datumPolaska,
+							datumPovratka: datumPovratka,
+							cenaOd: cenaOd,
+							cenaDo: cenaDo,
+							selectedSmestaji: JSON.stringify(selectedSmestaji),
+							selectedkategorije: JSON.stringify(selectedkategorije),
+							selectedPrevozi: JSON.stringify(selectedPrevozi),
+							nazivDestinacije: nazivDestinacije,
+							sifraPutovanja: sifraPutovanja,
+							brNocenja: brNocenja,
+							brOsoba: brOsoba
+						}
+
+						console.log(data)
+
+						$.ajax({
+							type: 'POST',
+							url: '/TravelOrganisation/putovanja/filter',
+							contentType: 'application/json',
+							data: JSON.stringify(data),
+							success: function (updatedData) {
+								console.log('Uspešno poslato na server:');
+								$('#listaPutovanja').empty();
+								$('#listaPutovanja').append(updatedData);
+
+							},
+							error: function (error) {
+								console.error('Greška prilikom slanja na server:', error);
+							}
+						});
+
+						return false;
+					}
+
+					function updateSelectedSmestaj() {
+						selectedSmestaji = [];
+						$('#smestaj input:checked').each(function () {
+							selectedSmestaji.push($(this).attr('id'));
+						});
+					}
+
+					function updateSelectedPrevoz() {
+						selectedPrevozi = [];
+						$('#prevoz > div  > input').each(function () {
+							if ($(this).is(":checked")) {
+								selectedPrevozi.push($(this).attr('id'))
+							}
+
+						})
+
+					}
+					function updateSelectedKategorija() {
+						selectedkategorije = [];
+						$('#kategorija > div  > input').each(function () {
+							if ($(this).is(":checked")) {
+								selectedkategorije.push($(this).attr('id'))
+							}
+
+						})
+
+					}
+
+					document.addEventListener('click', function (event) {
+						var sortMenu = document.getElementById('sortMenu');
+						var menuButton = document.getElementById('menu-button');
+
+						if (!sortMenu.contains(event.target) && !menuButton.contains(event.target)) {
+							sortMenu.classList.add('hidden');
+						}
+					});
+
+					function handleSort() {
+						$("#sortMenu").toggleClass("hidden")
+
+					}
+
+					$(document).ready(function () {
+						function sortCards(option) {
+							cards = $('#listaPutovanja > div ').get();
+
+							var sortProperty = $(option).attr('data-sort-property');
+							var sortDirection = $(option).attr('data-sort-direction');
+
+							cards.sort(function (a, b) {
+								if (sortProperty === "cena") {
+
+									var aValue = parseFloat($(a).children("div").attr(`data-${sortProperty}`).toUpperCase());
+									var bValue = parseFloat($(b).children("div").attr(`data-${sortProperty}`).toUpperCase());
+
+									return sortDirection === 'ASC' ? aValue - bValue : bValue - aValue;
+								}
+								else {
+									var aValue = $(a).children("div").attr(`data-${sortProperty}`).toUpperCase();
+									var bValue = $(b).children("div").attr(`data-${sortProperty}`).toUpperCase();
+
+									return sortDirection === 'ASC' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+
+								}
+							});
+
+							$('#listaPutovanja ').empty().append(cards);
+						}
+
+						window.sortCards = sortCards;
+					});
+
+				</script>
+	</div>
+	</section>
+	</main>
+	</div>
+	</div>
+
+	</div>
+</body>
+
+
+</html>
