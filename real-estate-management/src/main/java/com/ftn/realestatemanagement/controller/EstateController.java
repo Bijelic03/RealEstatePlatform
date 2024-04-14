@@ -24,6 +24,10 @@ import java.util.List;
 @RequestMapping("/estates")
 public class EstateController {
 
+    private final LocationService locationService;
+
+    private final AgencyService agencyService;
+
     private final EstateService estateService;
 
     @GetMapping("/search")
@@ -40,9 +44,6 @@ public class EstateController {
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
     }
 
-    private final LocationService locationService;
-
-    private final AgencyService agencyService;
 
     @GetMapping("/add")
     public String showEstateForm(Model model){
