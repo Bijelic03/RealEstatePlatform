@@ -24,7 +24,10 @@ public class Estate {
     private double price;
     @ManyToOne
     private Location location;
+    @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
+    @Enumerated(EnumType.STRING)
     private SaleStatus saleStatus;
-
+    @ManyToOne
+    private Agency agency;
 }
