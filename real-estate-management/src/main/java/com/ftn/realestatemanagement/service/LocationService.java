@@ -10,6 +10,9 @@ public interface LocationService {
     Location getById(long id);
 
     public List<LocationDto> getAllLocations();
+
+    List<LocationDto> getAllUnusedLocations();
+
     LocationDto createLocation(LocationDto locationDto);
 
     void deleteLocation(Long id);

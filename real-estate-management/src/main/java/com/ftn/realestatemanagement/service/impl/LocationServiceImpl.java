@@ -1,9 +1,7 @@
 package com.ftn.realestatemanagement.service.impl;
 
-import com.ftn.realestatemanagement.dto.EstateDto;
 import com.ftn.realestatemanagement.dto.LocationDto;
 import com.ftn.realestatemanagement.model.Location;
-import com.ftn.realestatemanagement.repository.EstateRepository;
 import com.ftn.realestatemanagement.repository.LocationRepository;
 import com.ftn.realestatemanagement.service.LocationService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +23,10 @@ public class LocationServiceImpl implements LocationService {
     public List<LocationDto> getAllLocations() {
         return locationRepository.findAll().stream().map(LocationDto::convertToDto).toList();
     }
-
+    @Override
+    public List<LocationDto> getAllUnusedLocations(){
+        return  locationRepository.findUnusedLocations().stream().map(LocationDto::convertToDto).toList();
+    }
     @Override
     public LocationDto createLocation(LocationDto locationDto) {
         return LocationDto.convertToDto(locationRepository.save(locationDto.convertToModel()));

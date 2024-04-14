@@ -1,13 +1,10 @@
 package com.ftn.realestatemanagement.service.impl;
 
 import com.ftn.realestatemanagement.dto.EstateDto;
-import com.ftn.realestatemanagement.model.Location;
 import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
 import com.ftn.realestatemanagement.repository.EstateRepository;
-import com.ftn.realestatemanagement.dto.VisitRequestDto;
 import com.ftn.realestatemanagement.model.Estate;
-import com.ftn.realestatemanagement.repository.EstateRepository;
 import com.ftn.realestatemanagement.service.AgencyService;
 import com.ftn.realestatemanagement.service.EstateService;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +23,20 @@ public class EstateServiceImpl implements EstateService {
     public List<EstateDto> getAllEstates() {
         return estateRepository.findAll().stream().map(EstateDto::convertToDto).toList();
     }
+    @Override
+    public List<EstateDto> getAllActiveEstates(){
+        return estateRepository.findAllByActive(true).stream().map(EstateDto::convertToDto).toList();
+    }
 
     @Override
     public Estate getById(Long id) {
         return estateRepository.getReferenceById(id);
     }
 
+    @Override
+    public EstateDto getByIdDto(Long id){
+        return  EstateDto.convertToDto(estateRepository.getReferenceById(id));
+    }
     @Override
     public EstateDto createEstate(EstateDto estateDto) {
         Estate estate = estateDto.convertToModel();

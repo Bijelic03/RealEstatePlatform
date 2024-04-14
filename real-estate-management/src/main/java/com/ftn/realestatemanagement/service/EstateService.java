@@ -11,10 +11,14 @@ import java.util.List;
 
 public interface EstateService {
 
+    List<EstateDto> getAllActiveEstates();
+
     Estate getById(Long id);
 
     List<EstateDto> getAllEstates();
 
+
+    EstateDto getByIdDto(Long id);
 
     EstateDto createEstate(EstateDto estateDto);
 
