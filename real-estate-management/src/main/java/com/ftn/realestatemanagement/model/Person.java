@@ -3,10 +3,7 @@ package com.ftn.realestatemanagement.model;
 
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -24,6 +21,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Enumerated(EnumType.STRING)
     private PersonType role;
 
     private String username;
