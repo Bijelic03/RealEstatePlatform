@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title th:text="#{title.registration}">Registracija</title>
+	<title>Registracija</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 
@@ -11,54 +11,53 @@
 
 	<div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
 		<div class="w-full max-w-md bg-white p-6 rounded-md shadow-md">
-			<h2 class="text-2xl font-bold mb-4" th:text="#{form.registration.title}">Formular za Registraciju</h2>
+			<h2 class="text-2xl font-bold mb-4">Register Form</h2>
 			<form th:action="@{/register}" th:object="${korisnik}" method="post">
 				<div class="mb-4">
 					<label for="korisnickoIme" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.username}">Korisničko ime:</label>
+						   >Username:</label>
 					<input type="text" class="mt-1 p-2 w-full border rounded-md" id="korisnickoIme"
 						   th:field="*{username}" required />
 				</div>
 				<div class="mb-4">
 					<label for="sifra" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.password}">Lozinka:</label>
+						   >Password:</label>
 					<input type="password" class="mt-1 p-2 w-full border rounded-md" id="sifra" th:field="*{password}"
 						   required />
 				</div>
 				<div class="mb-4">
 					<label for="email" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.email}">Email:</label>
+						   >Email:</label>
 					<input type="email" class="mt-1 p-2 w-full border rounded-md" id="email" th:field="*{email}"
 						   required />
 				</div>
 				<div class="mb-4">
 					<label for="ime" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.firstname}">Ime:</label>
+						   >Name:</label>
 					<input type="text" class="mt-1 p-2 w-full border rounded-md" id="ime" th:field="*{name}"
 						   required />
 				</div>
 				<div class="mb-4">
 					<label for="prezime" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.lastname}">Prezime:</label>
+						   >Surname:</label>
 					<input type="text" class="mt-1 p-2 w-full border rounded-md" id="prezime" th:field="*{surname}"
 						   required />
 				</div>
 				<div class="mb-4">
 					<label for="adresa" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.address}">Adresa:</label>
+						   >Address:</label>
 					<input type="text" class="mt-1 p-2 w-full border rounded-md" id="adresa" th:field="*{address}"
 						   required />
 				</div>
 				<div class="mb-4">
 					<label for="brojTelefona" class="block text-sm font-medium text-gray-600"
-						   th:text="#{label.phonenumber}">Broj telefona:</label>
+						   >Phone Number:</label>
 					<input type="text" class="mt-1 p-2 w-full border rounded-md" id="brojTelefona"
 						   th:field="*{phone}" required />
 				</div>
 
 				<button type="submit"
-						class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-						th:text="#{button.register}">Registrovati se</button>
+						class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Register</button>
 			</form>
 		</div>
 
