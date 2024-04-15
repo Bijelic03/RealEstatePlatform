@@ -29,4 +29,10 @@ public interface EstateRepository extends JpaRepository<Estate, Long> {
                               PropertyType propertyType,
                               SaleStatus saleStatus,
                               Long agencyId);
+
+
+    List<Estate> findAllByActive(boolean active);
+
+
+
 }
