@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,11 +56,11 @@ public class EstateController {
     }
 
     @PostMapping("/add")
-    public String createEstate(EstateDto estateDto){
-
-        estateService.createEstate(estateDto);
+    public String createEstate(@ModelAttribute EstateDto estateDto, @RequestParam("images") List<MultipartFile> images) {
+        estateService.createEstate(estateDto, images);
         return "redirect:/";
     }
+
 
     @GetMapping("/edit/{id}")
     public String showEstateEditForm(Model model, @PathVariable Long id) {
@@ -75,7 +76,7 @@ public class EstateController {
         return "fragments/editEstate";
     }
     @PostMapping("/edit")
-    public String editEstate(EstateDto estateDto){
+    public String editEstate(@RequestBody EstateDto estateDto){
         estateService.editEstate(estateDto);
 
         return "redirect:/";

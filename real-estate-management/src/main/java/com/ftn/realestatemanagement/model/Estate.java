@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Entity
@@ -39,6 +40,6 @@ public class Estate {
     @Enumerated(EnumType.STRING)
     private SaleStatus saleStatus;
 
-
-
+    @OneToMany(mappedBy = "estate", cascade = CascadeType.ALL) // OneToMany relationship
+    private List<Image> images;
 }

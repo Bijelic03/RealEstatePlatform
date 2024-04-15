@@ -6,6 +6,7 @@ import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
 import com.ftn.realestatemanagement.dto.VisitRequestDto;
 import com.ftn.realestatemanagement.model.Estate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface EstateService {
 
     EstateDto getByIdDto(Long id);
 
-    EstateDto createEstate(EstateDto estateDto);
+    EstateDto createEstate(EstateDto estateDto, List<MultipartFile> images);
 
     EstateDto editEstate(EstateDto estateDto);
 
