@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md bg-white p-6 rounded-md shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Estate Registration Form</h2>
+        <form action="/RealEstate/estates/add" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-600">Name:</label>
+                <input type="text" class="mt-1 p-2 w-full border rounded-md" id="name" name="name" required>
+            </div>
+            <div class="mb-4">
+                <label for="agencyId" class="block text-sm font-medium text-gray-600">Agency:</label>
+                <select class="mt-1 p-2 w-full border rounded-md" id="agencyId" name="agencyId" required>
+                    <option th:each="agency : ${agencies}" th:value="${agency.id}" th:text="${agency.name}"></option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="area" class="block text-sm font-medium text-gray-600">Area (sqm):</label>
+                <input type="number" class="mt-1 p-2 w-full border rounded-md" id="area" name="area" required>
+            </div>
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-600">Price (€):</label>
+                <input type="number" class="mt-1 p-2 w-full border rounded-md" id="price" name="price" required>
+            </div>
+            <div class="mb-4">
+                <label for="location" class="block text-sm font-medium text-gray-600">Location:</label>
+                <select class="mt-1 p-2 w-full border rounded-md" id="location" name="location" required>
+                   <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.street}"></option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="propertyType" class="block text-sm font-medium text-gray-600">Property Type:</label>
+                <select class="mt-1 p-2 w-full border rounded-md" id="propertyType" name="propertyType" required>
+                    <option th:each="type : ${T(com.ftn.realestatemanagement.model.PropertyType).values()}"
+                            th:value="${type}"
+                            th:text="${type.displayName}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="saleStatus" class="block text-sm font-medium text-gray-600">Sale Status:</label>
+                <select class="mt-1 p-2 w-full border rounded-md" id="saleStatus" name="saleStatus" required>
+                    <option th:each="typ : ${T(com.ftn.realestatemanagement.model.SaleStatus).values()}"
+                            th:value="${typ}"
+                            th:text="${typ.displayName}">
+                    </option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="images" class="block text-sm font-medium text-gray-600">Images:</label>
+                <input type="file" class="mt-1 p-2 w-full border rounded-md" id="images" name="images" multiple required>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Register Estate</button>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

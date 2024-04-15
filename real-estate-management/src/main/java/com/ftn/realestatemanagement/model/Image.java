@@ -1,15 +1,14 @@
 package com.ftn.realestatemanagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "Image")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image {
@@ -18,5 +17,8 @@ public class Image {
     private long id;
     private String imagePath;
     private String name;
-    private Long estateId;
+
+    @ManyToOne
+    @JoinColumn(name = "estate_id") // ManyToOne relationship
+    private Estate estate;
 }

@@ -1,18 +1,16 @@
 package com.ftn.realestatemanagement.dto;
 
-import com.ftn.realestatemanagement.model.Location;
 import com.ftn.realestatemanagement.model.Person;
 import com.ftn.realestatemanagement.model.PersonType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import org.springframework.cglib.core.Local;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+@Builder
 public class PersonDto {
 
     private long id;
