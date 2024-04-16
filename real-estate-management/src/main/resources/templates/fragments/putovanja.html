@@ -241,7 +241,7 @@
 					<div class="px-20 col-span-4 flex items-center justify-center min-h-screen">
 						<div id="listaPutovanja" class="col-span-1 mt-6 grid grid-cols-2 gap-8">
 							<!-- Poziv fragmenta putovanjeCard -->
-							<div th:each="i : ${#numbers.sequence(1,4)}">
+							<div th:each="estate : ${estates}">
 								<!-- Poziv fragmenta putovanjeCard -->
 								<div th:replace="fragments/card"></div>
 							</div>

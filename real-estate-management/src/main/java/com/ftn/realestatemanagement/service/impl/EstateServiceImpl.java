@@ -23,11 +23,13 @@ public class EstateServiceImpl implements EstateService {
     }
 
     @Override
-    public List<EstateDto> searchEstates(String name, String city, Integer fromArea, Integer toArea,
+    public List<EstateDto>searchEstates(String name, String city, Integer fromArea, Integer toArea,
                                          Double fromPrice, Double toPrice, PropertyType propertyType,
                                          SaleStatus saleStatus, Long agencyId) {
 
-        return estateRepository.findByParams(name, city, fromArea, toArea, fromPrice, toPrice, propertyType,
+        System.out.println("Radim");
+
+        return estateRepository.findByParams(name, fromArea, toArea, fromPrice, toPrice, propertyType,
                 saleStatus, agencyId)
                 .stream()
                 .map(EstateDto::convertToDto)

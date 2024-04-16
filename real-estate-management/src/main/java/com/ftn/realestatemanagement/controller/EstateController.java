@@ -32,6 +32,18 @@ public class EstateController {
                                                         @RequestParam(required = false) PropertyType propertyType,
                                                         @RequestParam(required = false) SaleStatus saleStatus,
                                                         @RequestParam(required = false) Long agencyId) {
+
+        System.out.println("Received attributes:");
+        System.out.println("Name: " + name);
+        System.out.println("City: " + city);
+        System.out.println("From Area: " + fromArea);
+        System.out.println("To Area: " + toArea);
+        System.out.println("From Price: " + fromPrice);
+        System.out.println("To Price: " + toPrice);
+        System.out.println("Property Type: " + propertyType);
+        System.out.println("Sale Status: " + saleStatus);
+        System.out.println("Agency ID: " + agencyId);
+
         return ResponseEntity.ok(estateService.searchEstates(name, city, fromArea, toArea,
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
     }
