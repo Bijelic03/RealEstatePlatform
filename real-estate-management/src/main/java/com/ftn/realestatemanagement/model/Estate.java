@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -18,16 +18,28 @@ public class Estate {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
-    private int area;
-    private boolean active = true;
-    private double price;
-    @ManyToOne
-    private Location location;
-    @Enumerated(EnumType.STRING)
-    private PropertyType propertyType;
-    @Enumerated(EnumType.STRING)
-    private SaleStatus saleStatus;
+
     @ManyToOne
     private Agency agency;
+
+    private String name;
+
+    private int area;
+
+    @Builder.Default
+    private Boolean active = true;
+
+    private double price;
+
+    @ManyToOne
+    private Location location;
+
+    @Enumerated(EnumType.STRING)
+    private PropertyType propertyType;
+
+    @Enumerated(EnumType.STRING)
+    private SaleStatus saleStatus;
+
+    @OneToMany(mappedBy = "estate", cascade = CascadeType.ALL) // OneToMany relationship
+    private List<Image> images;
 }

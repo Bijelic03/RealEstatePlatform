@@ -1,17 +1,19 @@
 package com.ftn.realestatemanagement.controller;
 
+import com.ftn.realestatemanagement.dto.AgencyDto;
 import com.ftn.realestatemanagement.dto.EstateDto;
-import com.ftn.realestatemanagement.model.Location;
+import com.ftn.realestatemanagement.dto.LocationDto;
+import com.ftn.realestatemanagement.service.AgencyService;
+import com.ftn.realestatemanagement.service.EstateService;
+import com.ftn.realestatemanagement.service.LocationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
-import com.ftn.realestatemanagement.service.EstateService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/estates")
 public class EstateController {
+
+    private final LocationService locationService;
+
+    private final AgencyService agencyService;
 
     private final EstateService estateService;
 
@@ -47,4 +53,54 @@ public class EstateController {
         return ResponseEntity.ok(estateService.searchEstates(name, city, fromArea, toArea,
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
     }
-}
+
+
+    @GetMapping("/add")
+    public String showEstateCreationForm(Model model){
+        model.addAttribute("estate", new EstateDto());
+
+        List<LocationDto> locationList = locationService.getAllUnusedLocations();
+        model.addAttribute("locations", locationList);
+
+        List<AgencyDto> agencyList = agencyService.getAllAgencies();
+        model.addAttribute("agencies", agencyList);
+        return "fragments/addEstate";
+    }
+
+    @PostMapping("/add")
+    public String createEstate(@ModelAttribute EstateDto estateDto, @RequestParam("images") List<MultipartFile> images) {
+        estateService.createEstate(estateDto, images);
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/edit/{id}")
+    public String showEstateEditForm(Model model, @PathVariable Long id) {
+
+
+        model.addAttribute("estate", estateService.getByIdDto(id));
+
+        List<LocationDto> locationList = locationService.getAllLocations();
+        model.addAttribute("locations", locationList);
+
+        List<AgencyDto> agencyList = agencyService.getAllAgencies();
+        model.addAttribute("agencies", agencyList);
+        return "fragments/editEstate";
+    }
+    @PostMapping("/edit")
+    public String editEstate(@RequestBody EstateDto estateDto){
+        estateService.editEstate(estateDto);
+
+        return "redirect:/";
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteEstate(@PathVariable Long id){
+        estateService.deleteEstate(id);
+        return "redirect:/";
+    }
+
+
+
+    }

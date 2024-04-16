@@ -14,7 +14,7 @@ public class HomeController {
     private final EstateService estateService;
 
     @GetMapping
-    public ModelAndView getHome(HttpSession session) {
+    public ModelAndView getHome() {
         return new ModelAndView("home").addObject("estates", estateService.getAllEstates());
     }
 }

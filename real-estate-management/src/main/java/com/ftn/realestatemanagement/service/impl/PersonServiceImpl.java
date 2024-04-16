@@ -27,6 +27,11 @@ public class PersonServiceImpl implements PersonService {
                 .map(user -> Optional.<PersonDto>empty())
                 .orElseGet(() -> Optional.of(PersonDto.convertToDto(personRepository.save(personDto.convertToModel()))));
     }
+
+    @Override
+    public Person getById(Long id) {
+        return personRepository.getReferenceById(id);
+    }
     @Override
     public List<PersonDto> getAllUsers() {
         return personRepository.findAll().stream()

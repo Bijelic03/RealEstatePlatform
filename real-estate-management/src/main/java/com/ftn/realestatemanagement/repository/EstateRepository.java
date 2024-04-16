@@ -30,4 +30,7 @@ public interface EstateRepository extends JpaRepository<Estate, Long> {
                               Long agencyId);
 
 
+    List<Estate> findAllByActive(boolean active);
+
+
 }
