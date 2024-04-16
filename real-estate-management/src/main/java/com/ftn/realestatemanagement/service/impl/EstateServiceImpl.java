@@ -98,7 +98,6 @@ public class EstateServiceImpl implements EstateService {
         return EstateDto.convertToDto(estateRepository.save(estate));
     }
 
-    @Override
     public void deleteEstate(Long id) {
         estateRepository.deleteById(id);
     }
@@ -106,7 +105,9 @@ public class EstateServiceImpl implements EstateService {
                                          Double fromPrice, Double toPrice, PropertyType propertyType,
                                          SaleStatus saleStatus, Long agencyId) {
 
-        return estateRepository.findByParams(name, city, fromArea, toArea, fromPrice, toPrice, propertyType,
+        System.out.println("Radim");
+
+        return estateRepository.findByParams(name, fromArea, toArea, fromPrice, toPrice, propertyType,
                 saleStatus, agencyId)
                 .stream()
                 .map(EstateDto::convertToDto)
