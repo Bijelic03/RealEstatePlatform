@@ -27,21 +27,21 @@
 
 					<div class="pr-5">
 						<span aria-hidden="true" class="absolute inset-0"></span>
-						<p>Grad:</p>
-						<p class="text-md">Destinacija</p>
+						<p>Name:</p>
+						<p class="text-md" th:text="${estate.name}"></p>
 					</div>
 					<div class="pr-5">
-						<p>Cena:</p>
-						<p class="text-md" data-property="cena">500</p>
+						<p>Price:</p>
+						<p class="text-md" data-property="cena" th:text="${estate.price}"></p>
 					</div>
 
 					<div class="pr-5">
-						<p>Kategorija:</p>
-						<p class="text-md">Kategorija</p>
+						<p>Area:</p>
+						<p class="text-md" th:text="${estate.area}"></p>
 					</div>
 					<div class="pr-5">
-						<p>Prevozno sredstvo:</p>
-						<p class="text-md">Prevozno sredstvo</p>
+						<p>Location:</p>
+						<p class="text-md" th:text="${estate.location.city}"></p>
 					</div>
 				</div>
 			</div>

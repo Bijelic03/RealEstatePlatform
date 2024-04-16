@@ -1,23 +1,23 @@
 package com.ftn.realestatemanagement.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import com.ftn.realestatemanagement.model.Estate;
 import com.ftn.realestatemanagement.model.Location;
 import com.ftn.realestatemanagement.model.PropertyType;
 import com.ftn.realestatemanagement.model.SaleStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class EstateDto {
 
-    private Long id;
+    private long id;
 
-    private Long agencyId;
+    private long agencyId;
 
     private String name;
 
@@ -33,6 +33,8 @@ public class EstateDto {
 
     private SaleStatus saleStatus;
 
+    private String imagePath;
+
     public static EstateDto convertToDto(Estate estate) {
         return EstateDto.builder()
                 .id(estate.getId())
@@ -44,11 +46,13 @@ public class EstateDto {
                 .location(estate.getLocation())
                 .propertyType(estate.getPropertyType())
                 .saleStatus(estate.getSaleStatus())
+                .imagePath(estate.getImages().get(0).getImagePath())
                 .build();
     }
 
     public Estate convertToModel() {
         return Estate.builder()
+                .id(getId())
                 .name(getName())
                 .area(getArea())
                 .active(isActive())

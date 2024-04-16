@@ -46,6 +46,8 @@ public class EstateServiceImpl implements EstateService {
         return  EstateDto.convertToDto(estateRepository.getReferenceById(id));
     }
 
+
+
     @Override
     public EstateDto createEstate(EstateDto estateDto, List<MultipartFile> imageFiles) {
 
@@ -105,9 +107,7 @@ public class EstateServiceImpl implements EstateService {
                                          Double fromPrice, Double toPrice, PropertyType propertyType,
                                          SaleStatus saleStatus, Long agencyId) {
 
-        System.out.println("Radim");
-
-        return estateRepository.findByParams(name, fromArea, toArea, fromPrice, toPrice, propertyType,
+        return estateRepository.findByParams(name, city, fromArea, toArea, fromPrice, toPrice, propertyType,
                 saleStatus, agencyId)
                 .stream()
                 .map(EstateDto::convertToDto)
