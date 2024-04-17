@@ -16,4 +16,5 @@ public interface PersonService {
 
     List<PersonDto> getAllUsers();
 
+    PersonDto createOwner(PersonDto personDto);
 }
