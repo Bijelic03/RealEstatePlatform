@@ -11,4 +11,6 @@ public interface AgencyService {
     Agency getById(Long id);
 
     List<AgencyDto> getAllAgencies();
+
+    AgencyDto createAgency(AgencyDto agencyDto);
 }

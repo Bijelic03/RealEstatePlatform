@@ -31,8 +31,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getById(Long id) {
+        System.out.println("ID koji se prosleđuje metodi getById: " + id);
         return personRepository.getReferenceById(id);
     }
+
     @Override
     public List<PersonDto> getAllUsers() {
         return personRepository.findAll().stream()
