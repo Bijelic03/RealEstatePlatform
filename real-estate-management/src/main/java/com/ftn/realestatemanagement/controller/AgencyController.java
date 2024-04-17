@@ -3,6 +3,8 @@ package com.ftn.realestatemanagement.controller;
 import com.ftn.realestatemanagement.dto.AgencyDto;
 import com.ftn.realestatemanagement.dto.PersonDto;
 import com.ftn.realestatemanagement.dto.LocationDto;
+import com.ftn.realestatemanagement.model.Agency;
+import com.ftn.realestatemanagement.model.Person;
 import com.ftn.realestatemanagement.service.AgencyService;
 import com.ftn.realestatemanagement.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,28 @@ public class AgencyController {
         agencyService.createAgency(agencyDto);
         return "redirect:/";
     }
+    @GetMapping("/edit/{id}")
+    public String getEditFrom(Model model, @PathVariable Long id){
 
+        model.addAttribute("agency", agencyService.getByIdDto(id));
+
+        List<PersonDto> personList = personService.getAllUsers();
+        model.addAttribute("person", personList);
+
+        return "fragments/editAgency";
+    }
+    @PostMapping("/edit")
+    public String editAgency(@ModelAttribute AgencyDto agencyDto){
+        agencyService.editAgency(agencyDto);
+        return "redirect:/";
+    }
+
+
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteAgency(@PathVariable Long id){
+        agencyService.deleteAgency(id);
+        return "redirect:/";
+    }
 
 }

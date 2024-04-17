@@ -38,5 +38,29 @@ public class AgencyServiceImpl implements AgencyService {
         return AgencyDto.convertToDto(agencyRepository.save(agency));
     }
 
+    @Override
+    public AgencyDto getByIdDto(Long id){
+        return  AgencyDto.convertToDto(agencyRepository.getReferenceById(id));
+    }
+
+    public void deleteAgency(Long id) {
+        agencyRepository.deleteById(id);
+    }
+
+    @Override
+    public  AgencyDto editAgency(AgencyDto agencyDto){
+        Agency agency = getById(agencyDto.getId());
+        agency.setName(agencyDto.getName());
+        agency.setAddress(agencyDto.getAddress());
+        agency.setAgencyOwner(personService.getById(agencyDto.getAgencyOwnerId()));
+
+        return AgencyDto.convertToDto(agencyRepository.save(agency));
+    }
+
+
+
+
 
 }
+
+
