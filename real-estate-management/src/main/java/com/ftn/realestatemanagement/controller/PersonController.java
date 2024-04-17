@@ -1,5 +1,6 @@
 package com.ftn.realestatemanagement.controller;
 
+import org.springframework.ui.Model;
 import com.ftn.realestatemanagement.dto.PersonDto;
 import com.ftn.realestatemanagement.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -21,4 +22,16 @@ public class PersonController {
         return ResponseEntity.ok(personService.getAllUsers());
     }
 
+    @GetMapping("/addOwner")
+    public String ShowOwnerCreatenForm(Model model){
+        model.addAttribute("Korisnici", new PersonDto());
+
+        return "fragments/addAgencyOwner";
+    }
+
+    @PostMapping("/addOwner")
+    public String createOwner(@ModelAttribute  PersonDto personDto){
+        personService.createOwner(personDto);
+        return "redirect:/";
+    }
 }

@@ -2,6 +2,7 @@ package com.ftn.realestatemanagement.service.impl;
 
 import com.ftn.realestatemanagement.dto.PersonDto;
 import com.ftn.realestatemanagement.model.Person;
+import com.ftn.realestatemanagement.model.PersonType;
 import com.ftn.realestatemanagement.repository.PersonRepository;
 import com.ftn.realestatemanagement.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,13 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDto> getAllUsers() {
         return personRepository.findAll().stream()
                 .map(PersonDto::convertToDto).toList();
+
+    }
+
+    @Override
+    public PersonDto createOwner(PersonDto personDto) {
+        Person person = personDto.convertToModel();
+        person.setRole(PersonType.AGENCY_OWNER);
+        return PersonDto.convertToDto(personRepository.save(person));
     }
 }
