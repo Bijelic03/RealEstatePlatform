@@ -27,7 +27,7 @@ public class AgentReviewDto {
                 .build();
     }
 
-    public AgentReview convertToModel(AgentReviewDto agentReviewDto) {
+    public AgentReview convertToModel() {
         return AgentReview.builder()
                 .id(getId())
                 .rating(getRating())

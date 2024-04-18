@@ -20,7 +20,7 @@ public class VisitRequestDto {
 
     private Long estateId;
 
-    private Long visitId;
+    private VisitDto visit;
 
     public static VisitRequestDto convertToDto(VisitRequest visitRequest) {
         return VisitRequestDto.builder()
@@ -29,11 +29,11 @@ public class VisitRequestDto {
                 .accepted(visitRequest.isAccepted())
                 .userId(visitRequest.getUser().getId())
                 .estateId(visitRequest.getEstate().getId())
-                .visitId(visitRequest.getVisit().getId())
+                .visit(VisitDto.convertToDto(visitRequest.getVisit()))
                 .build();
     }
 
-    public VisitRequest convertToModel(VisitRequestDto visitRequestDto) {
+    public VisitRequest convertToModel() {
         return VisitRequest.builder()
                 .id(getId())
                 .dateTime(getDateTime())
