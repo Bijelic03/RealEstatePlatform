@@ -1,5 +1,6 @@
 package com.ftn.realestatemanagement.model;
 
 public enum PersonType {
-    ADMIN, AGENT, AGENCY_OWNER, GUEST
+
+    USER, ADMIN, AGENT, AGENCY_OWNER
 }

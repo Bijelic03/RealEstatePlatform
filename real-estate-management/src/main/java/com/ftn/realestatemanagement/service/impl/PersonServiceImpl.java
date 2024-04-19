@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.ftn.realestatemanagement.model.PersonType.USER;
+
 @Service
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
@@ -24,8 +26,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Optional<PersonDto> register(PersonDto personDto) {
-        Person person = personDto.convertToModel();
-        person.setRole(PersonType.GUEST);
+
+        personDto.setRole(USER);
         return personRepository.getUserByUsername(personDto.getUsername())
                 .map(user -> Optional.<PersonDto>empty())
                 .orElseGet(() -> {
