@@ -33,7 +33,6 @@ public class PersonDto {
 
     public static PersonDto convertToDto(Person person) {
         return PersonDto.builder()
-                .id(person.getId())
                 .username(person.getUsername())
                 .password(person.getPassword())
                 .name(person.getName())
