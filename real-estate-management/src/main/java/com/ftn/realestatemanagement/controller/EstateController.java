@@ -6,6 +6,7 @@ import com.ftn.realestatemanagement.dto.LocationDto;
 import com.ftn.realestatemanagement.service.AgencyService;
 import com.ftn.realestatemanagement.service.EstateService;
 import com.ftn.realestatemanagement.service.LocationService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class EstateController {
     private final EstateService estateService;
 
     @GetMapping("/search")
-    public ResponseEntity<List<EstateDto>> searchEstates(@RequestParam(required = false) String name,
+    public String searchEstates(@RequestParam(required = false) String name,
                                                         @RequestParam(required = false) String city,
                                                         @RequestParam(required = false) Integer fromArea,
                                                         @RequestParam(required = false) Integer toArea,
@@ -37,21 +38,14 @@ public class EstateController {
                                                         @RequestParam(required = false) Double toPrice,
                                                         @RequestParam(required = false) PropertyType propertyType,
                                                         @RequestParam(required = false) SaleStatus saleStatus,
-                                                        @RequestParam(required = false) Long agencyId) {
+                                                        @RequestParam(required = false) Long agencyId,
+                                Model model, HttpSession session) {
 
-        System.out.println("Received attributes:");
-        System.out.println("Name: " + name);
-        System.out.println("City: " + city);
-        System.out.println("From Area: " + fromArea);
-        System.out.println("To Area: " + toArea);
-        System.out.println("From Price: " + fromPrice);
-        System.out.println("To Price: " + toPrice);
-        System.out.println("Property Type: " + propertyType);
-        System.out.println("Sale Status: " + saleStatus);
-        System.out.println("Agency ID: " + agencyId);
-
-        return ResponseEntity.ok(estateService.searchEstates(name, city, fromArea, toArea,
+        model.addAttribute("estates", estateService.searchEstates(name, city, fromArea, toArea,
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
+
+
+        return "fragments/estates :: estateList";
     }
 
 
