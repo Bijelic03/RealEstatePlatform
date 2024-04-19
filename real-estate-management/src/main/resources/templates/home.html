@@ -12,11 +12,14 @@
             background-repeat: no-repeat;
             height: 100%;
         }
+        #title-text{
+        -webkit-text-stroke: 1px black;
+        }
     </style>
 </head>
 
 <body class="bg-fixed"
-      style="background-image: url('https://cdn.discordapp.com/attachments/1167594394694717540/1229944716330668172/18a3cd56-f3f4-4162-8bb4-6d90bc795e8a.jpg?ex=66318647&is=661f1147&hm=7a4f1a104570588f181fe33524be48c5ec9d913d8625f58a05f167482c06a595&')">
+      style="background-image: url('https://cdn.discordapp.com/attachments/1167594394694717540/1229944716330668172/18a3cd56-f3f4-4162-8bb4-6d90bc795e8a.jpg?ex=66225d07&is=66210b87&hm=6baf397b5206f61bfa7d47885afc67022cd69325534afe22c16eca44524bfbcb&')">
 
 <div class="">
     <div th:replace="fragments/header :: header"></div>
@@ -26,16 +29,9 @@
              aria-hidden="true"></div>
         <div class="mx-auto max-w-2xl py-32 sm:py-48 ">
             <div class="text-center">
-                <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl"
-                   >Istražite svet sa Auris Travelom</h1>
-                <p class="mt-6 text-lg leading-8 text-white">Vaša kapija ka nezaboravnim putovanjima!</p>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#"
-                       class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >Get started</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-white"
-                       >Learn more <span aria-hidden="true">→</span></a>
-                </div>
+                <h1 id="title-text" class="text-4xl font-bold tracking-tight text-white sm:text-6xl"
+                   >Warmth in Mind, Cool in Action</h1>
+
             </div>
         </div>
         <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
@@ -45,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="z-50" th:insert="fragments/putovanja :: putovanja"></div>
+    <div class="z-50" th:insert="fragments/estates :: estates"></div>
     <div th:insert="fragments/footer :: footer"></div>
 </div>
 

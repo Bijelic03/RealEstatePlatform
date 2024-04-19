@@ -101,6 +101,18 @@ public class EstateController {
         return "redirect:/";
     }
 
+    @GetMapping("/show/{id}")
+    public String showEstate(Model model, @PathVariable Long id){
 
+
+        model.addAttribute("estate", estateService.getByIdDto(id));
+
+        List<LocationDto> locationList = locationService.getAllLocations();
+        model.addAttribute("locations", locationList);
+
+        List<AgencyDto> agencyList = agencyService.getAllAgencies();
+        model.addAttribute("agencies", agencyList);
+        return "fragments/Estate";
+    }
 
     }
