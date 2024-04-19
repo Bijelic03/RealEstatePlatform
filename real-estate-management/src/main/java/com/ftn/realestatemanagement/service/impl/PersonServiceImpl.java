@@ -51,4 +51,10 @@ public class PersonServiceImpl implements PersonService {
         person.setRole(PersonType.AGENCY_OWNER);
         return PersonDto.convertToDto(personRepository.save(person));
     }
+    @Override
+    public PersonDto createAgent(PersonDto personDto) {
+        Person person = personDto.convertToModel();
+        person.setRole(PersonType.AGENT);
+        return PersonDto.convertToDto(personRepository.save(person));
+    }
 }

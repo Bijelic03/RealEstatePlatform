@@ -42,4 +42,17 @@ public class PersonController {
         personService.createOwner(personDto);
         return "redirect:/";
     }
+
+    @GetMapping("/addAgent")
+    public String ShowAgentCreationForm(Model model){
+        model.addAttribute("Korisnici", new PersonDto());
+
+        return "fragments/addAgent";
+    }
+
+    @PostMapping("/addAgent")
+    public String createAgent(@ModelAttribute PersonDto personDto){
+        personService.createAgent(personDto);
+        return "redirect:/";
+    }
 }
