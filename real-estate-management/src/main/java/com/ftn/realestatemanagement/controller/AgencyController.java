@@ -24,6 +24,12 @@ public class AgencyController {
 
 
     private  final PersonService personService;
+
+    @GetMapping("/view")
+    public String index(Model model) {
+        model.addAttribute("agency", agencyService.getAllAgencies());
+        return "agencies";
+    }
     @GetMapping("/add")
     public String showAgencyCreationForm(Model model){
         model.addAttribute("agency", new AgencyDto());
@@ -56,7 +62,7 @@ public class AgencyController {
 
 
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteAgency(@PathVariable Long id){
         agencyService.deleteAgency(id);
         return "redirect:/";

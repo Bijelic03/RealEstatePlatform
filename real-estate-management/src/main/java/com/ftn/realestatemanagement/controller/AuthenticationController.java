@@ -36,7 +36,7 @@ public class AuthenticationController {
         PersonDto logedInUser = personService.login(personDto);
 
         if (logedInUser != null) {
-            session.setAttribute(LOGED_IN_USER, logedInUser);
+            session.setAttribute("logedUser", logedInUser);
             return "redirect:/";
         } else {
             model.addAttribute("loginError", "Korisnik ne postoji ili su uneti pogrešni podaci.");
@@ -48,6 +48,8 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute(LOGED_IN_USER);
+        session.removeAttribute("logedUser");
+
         return "redirect:/";
     }
 
@@ -68,6 +70,8 @@ public class AuthenticationController {
             session = request.getSession(true);
 
             session.setAttribute(LOGED_IN_USER, personDto);
+
+
 
             return "redirect:/";
         } else {

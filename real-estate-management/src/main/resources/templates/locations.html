@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'Destinacije'"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body>
+
+<div th:replace="fragments/layout :: zajednickaStranica(~{::title}, ~{::centralniDiv})">
+    <div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
+        <table class="text-gray-900 min-w-full bg-white border border-gray-300">
+            <thead>
+            <tr>
+
+                <th class="py-2 px-4 border-b">Postal Code</th>
+                <th class="py-2 px-4 border-b">Country</th>
+                <th class="py-2 px-4 border-b">City</th>
+                <th class="py-2 px-4 border-b">District</th>
+                <th class="py-2 px-4 border-b">Street</th>
+                <th class="py-2 px-4 border-b">Street Number</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="location : ${location}">
+                <td class="text-center py-2 px-2 border" th:text="${location.postalCode}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${location.county}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${location.city}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${location.district}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${location.street}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${location.streetNumber}"></td>
+                <td class="text-center py-2 px-2 border">
+                    <a th:href="@{/locations/delete/{id}(id=${location.id})}" class="text-center py-2 px-2 border">Delete</a>
+                </td>
+                <td class="text-center py-2 px-2 border">
+                    <a th:href="@{/locations/edit/{id}(id=${location.id})}" class="text-center py-2 px-2 border">Edit</a>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

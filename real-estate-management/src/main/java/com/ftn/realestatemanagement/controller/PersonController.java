@@ -22,6 +22,14 @@ public class PersonController {
         return ResponseEntity.ok(personService.getAllUsers());
     }
 
+    @GetMapping("/view")
+    public  String index(Model model) {
+
+        model.addAttribute("person", personService.getAllUsers());
+        return "persons";
+
+    }
+
     @GetMapping("/addOwner")
     public String ShowOwnerCreatenForm(Model model){
         model.addAttribute("Korisnici", new PersonDto());

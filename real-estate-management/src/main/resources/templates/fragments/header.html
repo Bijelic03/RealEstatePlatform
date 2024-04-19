@@ -17,18 +17,23 @@
 
         <div class=" lg:flex lg:gap-x-8">
 
-            <a href="/RealEstate/agencies/add" class="text-sm font-semibold leading-6 text-white">Add agency</a>
-            <a href="/RealEstate/users" class="text-sm font-semibold leading-6 text-white">Add agent</a>
-            <a href="/RealEstate/estates/add" class="text-sm font-semibold leading-6 text-white">Add estate</a>
-            <a href="/RealEstate/users/addOwner" class="text-sm font-semibold leading-6 text-white">Add owner</a>
-            <a href="/izvestaj" class="text-sm font-semibold leading-6 text-white">Report</a>
+            <a  th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/users/view" class="text-sm font-semibold leading-6 text-white">Persons</a>
+            <a  th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/agencies/view" class="text-sm font-semibold leading-6 text-white">Agency</a>
+            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'AGENCY_OWNER'}" href="/RealEstate/agencies/add" class="text-sm font-semibold leading-6 text-white">Add agency</a>
+            <a  th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/users" class="text-sm font-semibold leading-6 text-white">Add agent</a>
+            <a  th:if="${session.logedUser != null && session.logedUser.role.name == 'AGENT'}" href="/RealEstate/location/add" class="text-sm font-semibold leading-6 text-white">Add location</a>
+            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/location/view" class="text-sm font-semibold leading-6 text-white">Locations</a>
+            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/users/addOwner" class="text-sm font-semibold leading-6 text-white">Add owner</a>
+            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'AGENT'}" href="/izvestaj" class="text-sm font-semibold leading-6 text-white">Report</a>
             <a href="/RealEstate/register" class="text-sm font-semibold leading-6 text-white">Register</a>
-            <a href="/TravelOrganisation/profil" class="text-sm font-semibold leading-6 text-white"></a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end mr-5">
-            <a href="/RealEstate/login" class="text-sm font-semibold leading-6 text-white">Login</a>
-            <a href="/RealEstate/logout" class="text-sm font-semibold leading-6 text-white">Logout</a>
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end mr-5">
+                <a th:if="${session.logedUser != null}" href="/RealEstate/logout" class="text-sm font-semibold leading-6 text-white">Logout</a>
+                <a th:if="${session.logedUser == null}" href="/RealEstate/login" class="text-sm font-semibold leading-6 text-white">Login</a>
+            </div>
         </div>
+
     </nav>
 </header>
 
