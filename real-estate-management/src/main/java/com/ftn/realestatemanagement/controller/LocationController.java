@@ -18,6 +18,13 @@ public class LocationController {
     private final LocationService locationService;
 
 
+    @GetMapping("/view")
+    public String index(Model model) {
+        model.addAttribute("location" , locationService.getAllLocations());
+        return "/locations";
+    }
+
+
     @GetMapping("/add")
     public String showLocationForm(Model model){
         model.addAttribute("location", new LocationDto());

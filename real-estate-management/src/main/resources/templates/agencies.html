@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title th:text="'Destinacije'"></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body>
+
+	<div th:replace="fragments/layout :: zajednickaStranica(~{::title}, ~{::centralniDiv})">
+		<div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
+			<table class="text-gray-900 min-w-full bg-white border border-gray-300">
+				<thead>
+					<tr>
+
+						<th class="py-2 px-4 border-b">Name</th>
+						<th class="py-2 px-4 border-b">Address</th>
+						<th class="py-2 px-4 border-b">Owner</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="agency : ${agency}">
+						<td class="text-center py-2 px-2 border" th:text="${agency.name}"></td>
+						<td class="text-center py-2 px-2 border" th:text="${agency.address}"></td>
+						<td class="text-center py-2 px-2 border" th:text="${agency.agencyOwnerId}"></td>
+						<td class="text-center py-2 px-2 border">
+							<a th:href="@{/agencies/delete/{id}(id=${agency.id})}" class="text-center py-2 px-2 border">Delete</a>
+						</td>
+						<td class="text-center py-2 px-2 border">
+							<a th:href="@{/agencies/edit/{id}(id=${agency.id})}" class="text-center py-2 px-2 border">Edit</a>
+						</td>
+
+
+
+
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>
