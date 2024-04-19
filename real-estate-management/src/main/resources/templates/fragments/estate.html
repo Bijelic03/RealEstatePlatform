@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title th:text="'Putovanje'"></title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        /* Higher z-index to appear above other elements */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-modal:hover,
+    .close-modal:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+<div th:replace="fragments/layout :: zajednickaStranica(~{::title}, ~{::centralniDiv})">
+
+    <div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
+
+        <div id="prikazPutovanja"
+             th:attr="estateId=${estate.id}, pricePerDay=${estate.price}"
+             class="py-16">
+            <div class="xl:container m-auto px-6 text-gray-900 md:px-12 xl:px-16">
+                <div
+                        class="lg:bg-gray-50 dark:lg:bg-darker lg:p-16 rounded-[4rem] space-y-6 md:flex flex-row-reverse md:gap-6 justify-center md:space-y-0 lg:items-center">
+                    <div class="md:5/12 lg:w-1/2">
+
+                  <img th:src="@{/img/{imageName} (imageName=${estate.imagePath})}" alt="Slika nekretnine"
+                     class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+
+                    </div>
+                    <div class="md:7/12 lg:w-1/2">
+                        <!-- Naziv nekretnine -->
+                        <h2 th:text="${estate.name}"
+                            class="text-3xl font-bold text-gray-900 md:text-4xl"></h2>
+                        <!-- Cena nekretnine -->
+
+                        <!-- Lokacija nekretnine -->
+                        <div class="divide-y space-y-4 divide-gray-100 ">
+                            <hr>
+                            <div class="pt-4 flex gap-4 md:items-center">
+                                <h4 class="font-semibold text-lg text-gray-700">Price:</h4>
+                                <h4 th:text="${estate.price}" class="font-semibold text-lg text-gray-700"></h4>
+                            </div>
+                            <div class="pt-4 flex gap-4 md:items-center">
+                                <h4 class="font-semibold text-lg text-gray-700">Location:</h4>
+                                <h4 th:text="${estate.location.city}" class="font-semibold text-lg text-gray-700"></h4>
+                            </div>
+                            <!-- Tip nekretnine -->
+                            <div class="pt-4 flex gap-4 md:items-center">
+                                <h4 class="font-semibold text-lg text-gray-700">Property type:</h4>
+                                <h4 th:text="${estate.propertyType}" class="font-semibold text-lg text-gray-700"></h4>
+                            </div>
+                            <!-- Status prodaje -->
+                            <div class="pt-4 flex gap-4 md:items-center">
+                                <h4 class="font-semibold text-lg text-gray-700">Sale status:</h4>
+                                <h4 th:text="${estate.saleStatus}" class="font-semibold text-lg text-gray-700"></h4>
+                            </div>
+                            <div class="pt-4 flex gap-4 md:items-center">
+                                <h4 class="font-semibold text-lg text-gray-700">Area:</h4>
+                                <h4 th:text="${estate.area}" class="font-semibold text-lg text-gray-700"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uključivanje fragmenta za prikaz slika nekretnine -->
+            <!-- <div th:replace="~{fragments/estate_images :: estateImages}"></div> -->
+
+        </div>
+
+        <!-- Ostatak HTML-a -->
+
+    </div>
+</div>
+</body>
+
+
+</html>
