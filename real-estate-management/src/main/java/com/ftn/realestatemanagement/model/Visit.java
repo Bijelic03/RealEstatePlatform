@@ -7,7 +7,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -25,4 +25,6 @@ public class VisitRequest {
     private Visit visit;
     @ManyToOne
     private Estate estate;
+    @ManyToOne
+    private Person agent;
 }

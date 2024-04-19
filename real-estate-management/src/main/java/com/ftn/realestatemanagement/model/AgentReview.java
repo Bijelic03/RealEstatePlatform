@@ -1,12 +1,12 @@
 package com.ftn.realestatemanagement.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity(name = "AgentReview")
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class AgentReview {
     @Id

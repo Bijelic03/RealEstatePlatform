@@ -1,46 +1,43 @@
 package com.ftn.realestatemanagement.dto;
 
 import com.ftn.realestatemanagement.model.VisitRequest;
-import com.ftn.realestatemanagement.service.EstateService;
-import com.ftn.realestatemanagement.service.PersonService;
 import lombok.*;
+
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 public class VisitRequestDto {
 
-    private final PersonService personService;
+    private long id;
 
-    private final EstateService estateService;
+    private Date dateTime;
+
+    private boolean accepted;
 
     private Long userId;
 
     private Long estateId;
 
-    private Date date;
-
-    private boolean accepted;
+    private VisitDto visit;
 
     public static VisitRequestDto convertToDto(VisitRequest visitRequest) {
         return VisitRequestDto.builder()
+                .id(visitRequest.getId())
+                .dateTime(visitRequest.getDateTime())
+                .accepted(visitRequest.isAccepted())
                 .userId(visitRequest.getUser().getId())
                 .estateId(visitRequest.getEstate().getId())
-                .date(visitRequest.getDateTime())
-                .accepted(visitRequest.isAccepted())
+                .visit(VisitDto.convertToDto(visitRequest.getVisit()))
                 .build();
     }
 
-    public VisitRequest convertToModel(VisitRequestDto visitRequestDto) {
+    public VisitRequest convertToModel() {
         return VisitRequest.builder()
-                .user(personService.getById(getUserId()))
-                .estate(estateService.getById(getEstateId()))
-                .dateTime(getDate())
+                .id(getId())
+                .dateTime(getDateTime())
                 .accepted(isAccepted())
                 .build();
     }
-
 }
