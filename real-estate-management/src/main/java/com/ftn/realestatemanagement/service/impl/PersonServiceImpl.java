@@ -31,7 +31,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.getUserByUsername(personDto.getUsername())
                 .map(user -> Optional.<PersonDto>empty())
                 .orElseGet(() -> {
-                    Person savedPerson = personRepository.save(person);
+                    Person savedPerson = personRepository.save(personDto.convertToModel());
                     return Optional.of(PersonDto.convertToDto(savedPerson));
                 });
     }
