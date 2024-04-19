@@ -46,7 +46,7 @@ public class EstateDto {
                 .location(estate.getLocation())
                 .propertyType(estate.getPropertyType())
                 .saleStatus(estate.getSaleStatus())
-                .imagePath(estate.getImages().get(0).getImagePath())
+                .imagePath(estate.getImages().get(0).getName())
                 .build();
     }
 
