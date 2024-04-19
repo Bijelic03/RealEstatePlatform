@@ -26,11 +26,16 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Optional<PersonDto> register(PersonDto personDto) {
+
         personDto.setRole(USER);
         return personRepository.getUserByUsername(personDto.getUsername())
                 .map(user -> Optional.<PersonDto>empty())
-                .orElseGet(() -> Optional.of(PersonDto.convertToDto(personRepository.save(personDto.convertToModel()))));
+                .orElseGet(() -> {
+                    Person savedPerson = personRepository.save(person);
+                    return Optional.of(PersonDto.convertToDto(savedPerson));
+                });
     }
+
 
     @Override
     public Person getById(Long id) {
