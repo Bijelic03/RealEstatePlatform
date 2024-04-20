@@ -38,6 +38,7 @@ public class LocationController {
 
         return "redirect:/";
     }
+
     @GetMapping("delete/{id}")
     public String deleteLocation(@PathVariable Long id){
         locationService.deleteLocation(id);

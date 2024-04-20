@@ -14,7 +14,7 @@ public class VisitRequestDto {
 
     private Date dateTime;
 
-    private boolean accepted;
+    private boolean accepted = false;
 
     private Long userId;
 
@@ -35,7 +35,6 @@ public class VisitRequestDto {
 
     public VisitRequest convertToModel() {
         return VisitRequest.builder()
-                .id(getId())
                 .dateTime(getDateTime())
                 .accepted(isAccepted())
                 .build();

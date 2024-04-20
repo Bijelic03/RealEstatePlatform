@@ -27,14 +27,15 @@ public class AgencyDto {
                 .name(agency.getName())
                 .address(agency.getAddress())
                 .agencyOwnerId(agency.getAgencyOwner().getId())
+
                 .build();
     }
+
     public Agency convertToModel(){
         return Agency.builder()
                 .id(getId())
                 .name(getName())
                 .address(getAddress())
-
                 .build();
     }
 }

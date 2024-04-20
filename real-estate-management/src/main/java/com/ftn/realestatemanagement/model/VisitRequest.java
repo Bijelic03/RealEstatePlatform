@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class VisitRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date dateTime;
     private boolean accepted;

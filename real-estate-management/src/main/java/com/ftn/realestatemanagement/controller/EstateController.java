@@ -60,10 +60,11 @@ public class EstateController {
 
         List<LocationDto> locationList = locationService.getAllUnusedLocations();
         model.addAttribute("locations", locationList);
-
+        EstateDto estateDto = new EstateDto();
         List<AgencyDto> agencyList = agencyService.getAllAgencies();
         model.addAttribute("agencies", agencyList);
         return "fragments/addEstate";
+
     }
 
     @PostMapping("/add")

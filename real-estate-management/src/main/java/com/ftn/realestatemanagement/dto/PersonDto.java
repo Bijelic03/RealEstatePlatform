@@ -33,6 +33,7 @@ public class PersonDto {
 
     public static PersonDto convertToDto(Person person) {
         return PersonDto.builder()
+                .id(person.getId())
                 .username(person.getUsername())
                 .password(person.getPassword())
                 .name(person.getName())
@@ -47,6 +48,19 @@ public class PersonDto {
     public Person convertToModel() {
         return Person.builder()
                 .id(getId())
+                .username(getUsername())
+                .password(getPassword())
+                .name(getName())
+                .surname(getSurname())
+                .address(getAddress())
+                .phone(getPhone())
+                .role(getRole())
+                .email(getEmail())
+                .build();
+    }
+
+    public Person convertToModelRegister() {
+        return Person.builder()
                 .username(getUsername())
                 .password(getPassword())
                 .name(getName())

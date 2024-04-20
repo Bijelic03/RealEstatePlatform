@@ -22,7 +22,6 @@ public class AgencyController {
 
     private final AgencyService agencyService;
 
-
     private  final PersonService personService;
 
     @GetMapping("/view")
@@ -41,7 +40,9 @@ public class AgencyController {
 
     @PostMapping("/add")
     public String createEstate(@ModelAttribute AgencyDto agencyDto) {
+        System.out.println(agencyDto.getAgencyOwnerId());
         agencyService.createAgency(agencyDto);
+        System.out.println(agencyDto.getAgencyOwnerId());
         return "redirect:/";
     }
     @GetMapping("/edit/{id}")

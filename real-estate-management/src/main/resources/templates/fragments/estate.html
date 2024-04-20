@@ -97,6 +97,26 @@
                                 <h4 th:text="${estate.area}" class="font-semibold text-lg text-gray-700"></h4>
                             </div>
                         </div>
+                        <form th:action="@{/visits/add}" method="post">
+                            <!-- Input polje za datum i vreme -->
+                            <div class="mb-4">
+                                <label for="visitDate" class="block text-gray-700 text-sm font-bold mb-2">Datum i vreme:</label>
+                               <input type="hidden" id="userId" th:value="${session.logedUser.id}">
+                                <input type="hidden" id="estateId" th:value="${estate.id}">
+                                <input type="hidden" id="visit" th:value="1">
+
+
+
+                                <input type="datetime-local" id="visitDate" name="dateTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </div>
+
+                            <!-- Ostala input polja ako su potrebna -->
+
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Book
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>

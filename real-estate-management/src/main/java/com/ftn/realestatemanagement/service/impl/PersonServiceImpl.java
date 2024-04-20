@@ -31,7 +31,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.getUserByUsername(personDto.getUsername())
                 .map(user -> Optional.<PersonDto>empty())
                 .orElseGet(() -> {
-                    Person savedPerson = personRepository.save(personDto.convertToModel());
+                    Person savedPerson = personRepository.save(personDto.convertToModelRegister());
                     return Optional.of(PersonDto.convertToDto(savedPerson));
                 });
     }
@@ -52,13 +52,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto createOwner(PersonDto personDto) {
-        Person person = personDto.convertToModel();
+        Person person = personDto.convertToModelRegister();
         person.setRole(PersonType.AGENCY_OWNER);
         return PersonDto.convertToDto(personRepository.save(person));
     }
     @Override
     public PersonDto createAgent(PersonDto personDto) {
-        Person person = personDto.convertToModel();
+        Person person = personDto.convertToModelRegister();
         person.setRole(PersonType.AGENT);
         return PersonDto.convertToDto(personRepository.save(person));
     }
