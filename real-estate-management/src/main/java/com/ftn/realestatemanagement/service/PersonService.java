@@ -19,4 +19,6 @@ public interface PersonService {
     PersonDto createOwner(PersonDto personDto);
 
     PersonDto createAgent(PersonDto personDto);
+
+    void deletePerson(Long id);
 }

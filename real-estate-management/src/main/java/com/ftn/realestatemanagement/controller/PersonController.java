@@ -55,4 +55,10 @@ public class PersonController {
         personService.createAgent(personDto);
         return "redirect:/";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deletePerson(@PathVariable Long id){
+        personService.deletePerson(id);
+        return "redirect:/users/view";
+    }
 }

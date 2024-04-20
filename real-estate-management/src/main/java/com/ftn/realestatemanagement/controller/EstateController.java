@@ -54,7 +54,12 @@ public class EstateController {
                 fromPrice, toPrice, propertyType, saleStatus, agencyId));
     }
 
-
+    @GetMapping("/view")
+    public String index(Model model) {
+        model.addAttribute("estate", estateService.getAllEstates());
+        model.addAttribute("agencies", agencyService.getAllAgencies());
+        return "estatesTable";
+    }
     @GetMapping("/add")
     public String showEstateCreationForm(Model model){
         model.addAttribute("estate", new EstateDto());
@@ -95,7 +100,7 @@ public class EstateController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteEstate(@PathVariable Long id){
         estateService.deleteEstate(id);
         return "redirect:/";

@@ -62,4 +62,6 @@ public class PersonServiceImpl implements PersonService {
         person.setRole(PersonType.AGENT);
         return PersonDto.convertToDto(personRepository.save(person));
     }
+    @Override
+    public void deletePerson(Long id){personRepository.deleteById(id);};
 }

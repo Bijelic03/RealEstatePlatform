@@ -21,10 +21,11 @@
             <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/agencies/view" class="text-sm font-semibold leading-6 text-white">Agency</a>
             <a th:if="${session.logedUser != null && (session.logedUser.role.name == 'AGENCY_OWNER' || session.logedUser.role.name == 'ADMIN')}" href="/RealEstate/agencies/add" class="text-sm font-semibold leading-6 text-white">Add agency</a>
             <a th:if="${session.logedUser != null && (session.logedUser.role.name == 'AGENT' || session.logedUser.role.name == 'ADMIN')}" href="/RealEstate/locations/add" class="text-sm font-semibold leading-6 text-white">Add location</a>
-            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/location/view" class="text-sm font-semibold leading-6 text-white">Locations</a>
+            <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/locations/view" class="text-sm font-semibold leading-6 text-white">Locations</a>
             <a th:if="${session.logedUser != null && session.logedUser.role.name == 'ADMIN'}" href="/RealEstate/users/addOwner" class="text-sm font-semibold leading-6 text-white">Add owner</a>
             <a th:if="${session.logedUser != null && (session.logedUser.role.name == 'AGENT' || session.logedUser.role.name == 'ADMIN' || session.logedUser.role.name == 'AGENCY_OWNER')}" href="/RealEstate/users/addAgent" class="text-sm font-semibold leading-6 text-white">Add Agent</a>
             <a th:if="${session.logedUser != null && (session.logedUser.role.name == 'AGENT' || session.logedUser.role.name == 'ADMIN' || session.logedUser.role.name == 'AGENCY_OWNER')}" href="/RealEstate/estates/add" class="text-sm font-semibold leading-6 text-white">Add Estate</a>
+            <a th:if="${session.logedUser != null && (session.logedUser.role.name == 'AGENT' || session.logedUser.role.name == 'ADMIN' || session.logedUser.role.name == 'AGENCY_OWNER')}" href="/RealEstate/estates/view" class="text-sm font-semibold leading-6 text-white">Estates</a>
 
             <a href="/RealEstate/register" th:if="${session.logedUser == null}" class="text-sm font-semibold leading-6 text-white">Register</a>
         </div>
