@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'Destinacije'"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body>
+
+<div th:replace="fragments/layout :: zajednickaStranica(~{::title}, ~{::centralniDiv})">
+    <div th:fragment="centralniDiv" class="flex items-center justify-center min-h-screen">
+        <table class="text-gray-900 min-w-full bg-white border border-gray-300">
+            <thead>
+            <tr>
+
+                <th class="py-2 px-4 border-b">Area</th>
+                <th class="py-2 px-4 border-b">Agency</th>
+                <th class="py-2 px-4 border-b">Name</th>
+                <th class="py-2 px-4 border-b">price</th>
+                <th class="py-2 px-4 border-b">location</th>
+                <th class="py-2 px-4 border-b">propertyType</th>
+                <th class="py-2 px-4 border-b">saleStatus</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="estate : ${estate}">
+                <td class="text-center py-2 px-2 border" th:text="${estate.area}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${estate.agencyId}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${estate.name}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${estate.price}"></td>
+
+                <td class="text-center py-2 px-2 border" th:text="${estate.location.city}"></td>
+
+                <td class="text-center py-2 px-2 border" th:text="${estate.propertyType}"></td>
+                <td class="text-center py-2 px-2 border" th:text="${estate.saleStatus}"></td>
+
+
+
+                <td class="text-center py-2 px-2 border">
+                    <a th:href="@{/estates/delete/{id}(id=${estate.id})}" method="delete" class="text-center py-2 px-2 border">Delete</a>
+                </td>
+                <td class="text-center py-2 px-2 border">
+                    <a th:href="@{/estates/edit/{id}(id=${estate.id})}" class="text-center py-2 px-2 border">Edit</a>
+                </td>
+
+
+
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

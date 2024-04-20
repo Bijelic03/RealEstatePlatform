@@ -34,6 +34,7 @@ public class AgencyDto {
                 .id(getId())
                 .name(getName())
                 .address(getAddress())
+
                 .build();
     }
 }
